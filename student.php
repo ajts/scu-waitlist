@@ -3,6 +3,8 @@
 		<meta charset="utf-8">
 		<link rel="stylesheet" type="text/css" href="style.css">
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
 	</head>
 	<body>
 		<div class="header" id="header">
@@ -66,7 +68,9 @@
 					<div class="below">
 						<label for="reason">Please explain why you need this class</label><br>
 						<textarea rows="3" id="reason" name="reason"></textarea>
-						<button type="Submit">Submit</button>
+						<div class="text-center">
+							<button class="btn btn-default" type="Submit">Submit</button>
+						</div>
 					</div>
 
 				</div>
@@ -75,8 +79,6 @@
 	</body>
 <html>
 <script type="text/javascript">
-
-
 	var lines = [];
 	var courses = [];
 	$(document).ready(function() {
@@ -94,8 +96,6 @@
 	        lines.push(data);
 	    }			    // alert(lines);
 	}
-
-	var sections = ['234543', '23432', '23432'];
 	function fillCourses(dept, coursesDd){
 		switch(dept.value){
 			case 'Computer Engineering':
@@ -109,7 +109,6 @@
 			break;
 		}
 	}
-
 	function fillSection(coursesDd, sectionDd){
 		var course = document.getElementById("course").value;
 		sectionDd.options.length=1;
@@ -126,5 +125,4 @@
 		x.text = text;
 		dd.add(x);
 	}
-
 </script>
