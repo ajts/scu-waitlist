@@ -3,6 +3,8 @@
 		<meta charset="utf-8">
 		<link rel="stylesheet" type="text/css" href="style.css">
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
 	</head>
 	<body>
 		<div class="header" id="header">
@@ -33,7 +35,7 @@
 					</p>
 					<p class="leftItem">
 						<label for="selectCourse">Select Course:</label>
-						<select class="leftItem" id="course" name="course" required onchange="fillSection()">
+						<select class="leftItem" id="course" name="course" required onchange="fillSection(this, document.getElementById('section'))">
 							<option></option>
 						</select>
 					</p>
@@ -66,7 +68,9 @@
 					<div class="below">
 						<label for="reason">Please explain why you need this class</label><br>
 						<textarea rows="3" id="reason" name="reason"></textarea>
-						<button type="Submit">Submit</button>
+						<div class="text-center">
+							<button class="btn btn-default" type="Submit">Submit</button>
+						</div>
 					</div>
 
 				</div>
@@ -75,31 +79,44 @@
 	</body>
 <html>
 <script type="text/javascript">
-
-	function loadCSV(){
-
-
+	var lines = [];
+	var courses = [];
+	$(document).ready(function() {
+	    $.ajax({
+	        type: "GET",
+	        url: "coen.csv",
+	        dataType: "text",
+	        success: function(data) {processData(data);}
+	     });
+	});
+	function processData(allText) {
+	    var allTextLines = allText.split(/\r\n|\n/);
+	    for (var i=1; i<allTextLines.length; i++) {
+	        var data = allTextLines[i].split(',');
+	        lines.push(data);
+	    }			    // alert(lines);
 	}
-	var sections = ['234543', '23432', '23432'];
-	var coen = ['COEN 10', 'COEN 11', 'COEN 12'];
 	function fillCourses(dept, coursesDd){
 		switch(dept.value){
 			case 'Computer Engineering':
-			coursesDd.options.length = 0;
-			for(i = 0; i < coen.length; i ++)
+			coursesDd.options.length = 1;
+			for(i = 1; i < lines.length; i ++)
 			{
-				addOption(coursesDd, coen[i], coen[i]);
+				if(lines[i][0]!=(lines[i-1][0])){
+					addOption(coursesDd, lines[i][0], lines[i][0]);
+				}
 			}
 			break;
 		}
 	}
-
 	function fillSection(coursesDd, sectionDd){
-		/*var course = coursesDd.value;*/
-
-		for(var i = 0; i < sections.length; i++)
+		var course = document.getElementById("course").value;
+		sectionDd.options.length=1;
+		for(var i = 0; i < lines.length; i++)
 		{
-			addOption(sectionDd, sections[i], sections[i]);
+			if(lines[i][0]==course){
+				addOption(sectionDd, lines[i][1], lines[0][i]);
+			}
 		}
 	}
 	function addOption(dd, text, value){
@@ -108,5 +125,4 @@
 		x.text = text;
 		dd.add(x);
 	}
-
 </script>
