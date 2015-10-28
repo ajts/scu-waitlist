@@ -52,31 +52,35 @@ table {
 	margin-bottom: 10px;
 }
 .header h1{
-	font-size: 20pt;
+	font-size: 25pt;
 }
 .header p{
-	font-size: 10pt;
+	font-size: 15pt;
+}
+.container{
+	width: 90% !important;
 }
 .container form{
 	border: 1px solid black;
 	margin-right: auto;
 	margin-left: auto;
 	width: 90%;
-	font-size: 8pt;
 	padding: 0;
 	display: flex;
+	font-size: 12pt;
 }
 .left{
 	width: 200px;
 	padding-top: 10px;
 	padding-left: 15px;
+	padding-right: 10px;
 	border: solid 1px black;
 	padding-bottom: 10px;
 }
 select{
-	font-size: 8pt;
 	min-width: 60%;
 	margin-bottom: 0;
+	max-width: 175px;
 }
 .right{
 	width: 100%;
@@ -97,6 +101,8 @@ select{
 }
 .info label{
 	margin-bottom: 5px;
+	width: 90px;
+	margin-left: 10px;
 }
 .below{
 	width: 65%;
@@ -106,10 +112,6 @@ select{
 }
 .below textarea{
 	width: 100%;
-}
-.info label{
-	width: 70px;
-	margin-left: 10px;
 }
 .text-center{
 	margin-top: 10px;

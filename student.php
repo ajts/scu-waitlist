@@ -41,7 +41,7 @@
 					</p>
 					<p class="leftItem">
 						<label for="sectionNumber">Section Number:</label>
-						<select class="leftItem" id="section" class="section" required>
+						<select class="leftItem" id="section" name="section" class="section" required>
 							<option></option>
 						</select>
 					</p>
@@ -67,7 +67,7 @@
 					</div>
 					<div class="below">
 						<label for="reason">Please explain why you need this class</label><br>
-						<textarea rows="3" id="reason" name="reason"></textarea>
+						<textarea rows="3" id="reason" name="reason" required></textarea>
 						<div class="text-center">
 							<button class="btn btn-default" type="Submit">Submit</button>
 						</div>
@@ -91,7 +91,7 @@
 	});
 	function processData(allText) {
 	    var allTextLines = allText.split(/\r\n|\n/);
-	    for (var i=1; i<allTextLines.length; i++) {
+	    for (var i=0; i<allTextLines.length; i++) {
 	        var data = allTextLines[i].split(',');
 	        lines.push(data);
 	    }			    // alert(lines);
@@ -125,4 +125,8 @@
 		x.text = text;
 		dd.add(x);
 	}
+	// function validate(){
+	// 	var id=document.getElementById("id").value;
+	// 	if(id!=)
+	// }
 </script>
