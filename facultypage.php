@@ -44,3 +44,63 @@
                 </div>
         </body>
 <html>
+        
+ <script type="text/javascript">
+        var lines = [];
+        var courses = [];
+        $(document).ready(function() {
+            $.ajax({
+                type: "GET",
+                url: "coen.csv",
+                dataType: "text",
+                success: function(data) {processData(data);}
+             });
+        });
+        function processData(allText) {
+            var allTextLines = allText.split(/\r\n|\n/);
+            for (var i=1; i<allTextLines.length; i++) {
+                var data = allTextLines[i].split(',');
+                lines.push(data);
+            }                       // alert(lines);
+        }
+        function fillCourses(dept, coursesDd){
+                switch(dept.value){
+                        case 'Computer Engineering':
+                        coursesDd.options.length = 1;
+                        for(i = 1; i < lines.length; i ++)
+                        {
+                                if(lines[i][0]!=(lines[i-1][0])){
+                                        addOption(coursesDd, lines[i][0], lines[i][0]);
+                                }
+                        }
+                        break;
+                }
+        }
+        function fillSection(coursesDd, sectionDd){
+                var course = document.getElementById("course").value;
+                sectionDd.options.length=1;
+                for(var i = 0; i < lines.length; i++)
+                {
+                        if(lines[i][0]==course){
+                                addOption(sectionDd, lines[i][1], lines[0][i]);
+                        }
+                }
+        }
+        function addOption(dd, text, value){
+                var x = document.createElement("option");
+                x.value = value;
+                x.text = text;
+                dd.add(x);
+        }
+        $(".submitbutton").click(function(){
+                var department = $('#dpmnt option:selected').text();
+                var course = $('#course option:selected').text();
+                var section = $('#section option:selected').text();
+                $.post('./core/scripts/getWaitlist.php', {department:department, course:course, section:section},
+                        function(data) {
+                                $(".waitlist").html(data);
+                        }, 'html');
+        });
+
+</script>
+       
