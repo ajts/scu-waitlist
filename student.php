@@ -14,6 +14,7 @@
 		<div class="container" id="container">
 			<form method="post" action="core/scripts/submitRequest.php" class="container">
 				<div class="left">
+				<!--
 					<p class="leftItem"><label for="year">Select Year:</lable>
 						<select class="leftItem" id="year" name="year">
 							<option></option>
@@ -27,6 +28,7 @@
 							<option>Summer</option>
 						</select>
 					</p>
+				-->
 					<p class="leftItem"><label for="selectDept">Select Department:</label>
 						<select class="leftItem" id="dpmnt" name="dpmnt" required onchange="fillCourses(this, document.getElementById('course'))">
 							<option></option>
@@ -115,12 +117,13 @@
 		for(var i = 0; i < lines.length; i++)
 		{
 			if(lines[i][0]==course){
-				addOption(sectionDd, lines[i][1], lines[0][i]);
+				addOption(sectionDd, lines[i][1], lines[i][1]);
 			}
 		}
 	}
 	function addOption(dd, text, value){
 		var x = document.createElement("option");
+		console.log(value);
 		x.value = value;
 		x.text = text;
 		dd.add(x);
