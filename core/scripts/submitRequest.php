@@ -14,6 +14,7 @@ $params['reason'] = trim($_POST['reason']);
 $request = new WaitlistEntry($params);
 try {
 	$request->save();
+	echo "success!";
 } catch(Exception $e) {
 	echo $e->getMessage();
 }
