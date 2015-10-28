@@ -30,18 +30,21 @@
 					</p>
 				-->
 					<p class="leftItem"><label for="selectDept">Select Department:</label>
-						<select class="leftItem" id="dpmnt" name="dpmnt" required onclick="fillCourses(this, document.getElementById('course'))">
-							<option selected>Computer Engineering</option>
+						<select class="leftItem" id="dpmnt" name="dpmnt" required onchange="fillCourses(this, document.getElementById('course'))">
+							<option>Select Department</option>
+							<option>Computer Engineering</option>
 						</select>
 					</p>
 					<p class="leftItem">
 						<label for="selectCourse">Select Course:</label>
 						<select class="leftItem" id="course" name="course" required onclick="fillSection(this, document.getElementById('section'))">
+							<option>Select Course</option>
 						</select>
 					</p>
 					<p class="leftItem">
 						<label for="sectionNumber">Section Number:</label>
 						<select class="leftItem" id="section" name="section" class="section" required>
+							<option>Selection Section</option>
 						</select>
 					</p>
 				</div>
@@ -118,7 +121,7 @@
 	}
 	function fillSection(coursesDd, sectionDd){
 		var course = document.getElementById("course").value;
-		sectionDd.options.length=1;
+		sectionDd.options.length=0;
 		for(var i = 0; i < lines.length; i++)
 		{
 			if(lines[i][0]==course){
