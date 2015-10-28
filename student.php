@@ -30,21 +30,18 @@
 					</p>
 				-->
 					<p class="leftItem"><label for="selectDept">Select Department:</label>
-						<select class="leftItem" id="dpmnt" name="dpmnt" required onchange="fillCourses(this, document.getElementById('course'))">
-							<option></option>
-							<option>Computer Engineering</option>
+						<select class="leftItem" id="dpmnt" name="dpmnt" required onclick="fillCourses(this, document.getElementById('course'))">
+							<option selected>Computer Engineering</option>
 						</select>
 					</p>
 					<p class="leftItem">
 						<label for="selectCourse">Select Course:</label>
-						<select class="leftItem" id="course" name="course" required onchange="fillSection(this, document.getElementById('section'))">
-							<option></option>
+						<select class="leftItem" id="course" name="course" required onclick="fillSection(this, document.getElementById('section'))">
 						</select>
 					</p>
 					<p class="leftItem">
 						<label for="sectionNumber">Section Number:</label>
 						<select class="leftItem" id="section" name="section" class="section" required>
-							<option></option>
 						</select>
 					</p>
 				</div>
@@ -60,18 +57,18 @@
 						</div>
 						<div>
 							<label for="id">Student ID:</label>
-							<input type="text" id="id" name="id" required>
+							<input type="text" id="id" name="id" required onchange="validateId()" placeholder="Ex. 0000012345">
 						</div>
 						<div>
-							<label for="email">E-mail:</label>
-							<input type="email" id="email" name="email" required>
+							<label for="email">SCU email:</label>
+							<input type="email" id="email" name="email" required onchange="validateEmail()">
 						</div>
 					</div>
 					<div class="below">
 						<label for="reason">Please explain why you need this class</label><br>
 						<textarea rows="3" id="reason" name="reason" required></textarea>
 						<div class="text-center">
-							<button class="btn btn-default" type="Submit">Submit</button>
+							<button id="submit" class="btn btn-default" type="Submit">Submit</button>
 						</div>
 					</div>
 
@@ -81,12 +78,13 @@
 	</body>
 <html>
 <script type="text/javascript">
-	var lines = [];
+
+	var lines = [];	
 	var courses = [];
 	$(document).ready(function() {
 	    $.ajax({
 	        type: "GET",
-	        url: "coen.csv",
+	        url: "./core/storage/courses/coen.csv",
 	        dataType: "text",
 	        success: function(data) {processData(data);}
 	     });
@@ -98,10 +96,17 @@
 	        lines.push(data);
 	    }			    // alert(lines);
 	}
+
 	function fillCourses(dept, coursesDd){
 		switch(dept.value){
 			case 'Computer Engineering':
-			coursesDd.options.length = 1;
+			course
+		}
+	}
+	function fillCourses(dept, coursesDd){
+		switch(dept.value){
+			case 'Computer Engineering':
+			coursesDd.options.length = 0;
 			for(i = 1; i < lines.length; i ++)
 			{
 				if(lines[i][0]!=(lines[i-1][0])){
@@ -123,13 +128,30 @@
 	}
 	function addOption(dd, text, value){
 		var x = document.createElement("option");
-		console.log(value);
 		x.value = value;
 		x.text = text;
 		dd.add(x);
 	}
-	// function validate(){
-	// 	var id=document.getElementById("id").value;
-	// 	if(id!=)
-	// }
+	function validateId(){
+		var idRegex = /00000\d\d\d\d\d$/;
+		var id=document.getElementById("id").value;
+		if(!idRegex.test(id)){
+			document.getElementById("submit").disabled=true;
+			alert('Please enter your Student ID according to the format: 0000012345');
+		}
+		else if(idRegex.test(id)){
+			document.getElementById("submit").disabled=false;
+		}
+	}
+	function validateEmail(){
+		var emailRegex = /.*@scu.edu/;
+		var email=document.getElementById("email").value;
+		if(!emailRegex.test(email)){
+			document.getElementById("submit").disabled=true;
+			alert('Please enter your Student email according to the format: aperson@scu.edu');
+		}
+		else if(emailRegex.test(email)){
+			document.getElementById("submit").disabled=false;
+		}
+	}
 </script>
