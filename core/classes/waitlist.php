@@ -70,7 +70,7 @@ class Waitlist {
 				</tr>
 			</thead>
 			<tbody>
-				<? for($i = 1; $i < count($entries); $i++) { 
+				<?php for($i = 1; $i < count($entries); $i++) { 
 					if($entries[$i]->getCourse() == $this->course) { ?>
 						<tr>
 							<td><?php echo $entries[$i]->getCourse();?></td>
@@ -81,11 +81,11 @@ class Waitlist {
 							<td><?php echo $entries[$i]->getStudentId();?></td>
 							<td><?php echo $entries[$i]->getReason();?></td>
 						</tr>
-					<? }
+					<?php }
 				} ?>
 			</tbody>
 		</table>
-		<?
+		<?php
 	}
 	
 	// returns true if student id is aleady in the waitlist for a course and section, false otherwise
