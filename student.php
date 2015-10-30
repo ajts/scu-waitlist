@@ -30,7 +30,7 @@
 					</p>
 				-->
 					<p class="leftItem"><label for="selectDept">Select Department:</label>
-						<select class="leftItem" id="dpmnt" name="dpmnt" required onchange="fillCourses(this, document.getElementById('course')) & fillC()">
+						<select class="leftItem" id="dpmnt" name="dpmnt" required onchange="fillCourses(this, document.getElementById('course'))">
 							<option>Select Department</option>
 							<option>Computer Engineering</option>
 						</select>
@@ -105,9 +105,17 @@
 			coursesDd.options.length = 0;
 			for(i = 1; i < lines.length; i ++)
 			{
-				if(lines[i][0]!=(lines[i-1][0])){
+				add = true;
+				var j = 0;
+				while(j < i && add==true){
+					if(lines[j][0]==lines[i][0])
+						add=false;
+					j++;
+				}
+				if(add == true){
 					addOption(coursesDd, lines[i][0], lines[i][0]);
 				}
+				
 			}
 			break;
 		}
@@ -150,22 +158,4 @@
 			document.getElementById("submit").disabled=false;
 		}
 	}
-
-	var list = [];
-	
-	function course(title, section){
-		this.title = title;
-		this.section = [];
-		for(var i = 0; i < section.length; i++){
-			this.section.push(section[i]);
-		}
-	}
-	function fillC(){
-		for(i = 0; i < lines.length; i++){
-			var x = new course(lines[i][0], lines[i][1]);
-			list.push(x);
-			console.log(list[i].title);
-		}
-	}
-
 </script>

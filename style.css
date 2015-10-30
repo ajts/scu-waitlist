@@ -116,3 +116,7 @@ select{
 .text-center{
 	margin-top: 10px;
 }
+.waitlist table{
+	margin: 10px;
+	border: solid 1pt black;
+}
