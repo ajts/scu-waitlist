@@ -15,21 +15,21 @@
                         <div class="form container">
                                 <div class="left">
                                         <p class="leftItem"><label for="selectDept">Select Department:</label>
-                                                <select class="leftItem" id="dpmnt" name="dpmnt" required onchange="fillCourses(this, document.getElementById('course'))">
-                                                        <option></option>
+                                                <select class="leftItem" id="dpmnt" name="dpmnt" required onclick="fillCourses(this, document.getElementById('course'))">
+                                                        <option>Select Option</option>
                                                         <option>Computer Engineering</option>
                                                 </select>
                                         </p>
                                         <p class="leftItem">
                                                 <label for="selectCourse">Select Course:</label>
-                                                <select class="leftItem" id="course" name="course" required onchange="fillSection(this, document.getElementById('section'))">
-                                                        <option></option>
+                                                <select class="leftItem" id="course" name="course" required onclick="fillSection(this, document.getElementById('section'))">
+                                                        <option>Select Option</option>
                                                 </select>
                                         </p>
                                         <p class="leftItem">
                                                 <label for="sectionNumber">Section Number:</label>
                                                 <select class="leftItem" id="section" class="section" required>
-                                                        <option></option>
+                                                        <option>Select Option</option>
                                                 </select>
                                         </p>
                                         <p class="leftItem">
