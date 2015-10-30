@@ -7,7 +7,8 @@ class Waitlist {
 	private $section;
 	private $course;
 	private $entries;
-	private $header;
+	private $courseBucket;
+	private $sectionBucket;
 	private $filePath;
 	
 	public function __construct($department, $section = "", $course) {

@@ -12,7 +12,7 @@
                         <p>Please select department, course, and section to view a waitlist.</p>
                 </div>
                 <div class="container" id="container">
-                        <form class="container">
+                        <div class="form container">
                                 <div class="left">
                                         <p class="leftItem"><label for="selectDept">Select Department:</label>
                                                 <select class="leftItem" id="dpmnt" name="dpmnt" required onchange="fillCourses(this, document.getElementById('course'))">
@@ -33,14 +33,14 @@
                                                 </select>
                                         </p>
                                         <p class="leftItem">
-                                                <button class="submitbutton">Submit</button>
+                                                <button class="submitbutton">Enter</button>
                                         </p>
                                 </div>
                                 <div class="right">
                                         <div class="waitlist"></div>
 
                                 </div>
-                        </form>
+                        </div>
                 </div>
         </body>
 <html>
