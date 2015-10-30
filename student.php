@@ -30,7 +30,7 @@
 					</p>
 				-->
 					<p class="leftItem"><label for="selectDept">Select Department:</label>
-						<select class="leftItem" id="dpmnt" name="dpmnt" required onchange="fillCourses(this, document.getElementById('course'))">
+						<select class="leftItem" id="dpmnt" name="dpmnt" required onchange="fillCourses(this, document.getElementById('course')) & fillC()">
 							<option>Select Department</option>
 							<option>Computer Engineering</option>
 						</select>
@@ -81,7 +81,7 @@
 	</body>
 <html>
 <script type="text/javascript">
-
+	
 	var lines = [];	
 	var courses = [];
 	$(document).ready(function() {
@@ -98,13 +98,6 @@
 	        var data = allTextLines[i].split(',');
 	        lines.push(data);
 	    }			    // alert(lines);
-	}
-
-	function fillCourses(dept, coursesDd){
-		switch(dept.value){
-			case 'Computer Engineering':
-			course
-		}
 	}
 	function fillCourses(dept, coursesDd){
 		switch(dept.value){
@@ -157,4 +150,22 @@
 			document.getElementById("submit").disabled=false;
 		}
 	}
+
+	var list = [];
+	
+	function course(title, section){
+		this.title = title;
+		this.section = [];
+		for(var i = 0; i < section.length; i++){
+			this.section.push(section[i]);
+		}
+	}
+	function fillC(){
+		for(i = 0; i < lines.length; i++){
+			var x = new course(lines[i][0], lines[i][1]);
+			list.push(x);
+			console.log(list[i].title);
+		}
+	}
+
 </script>
