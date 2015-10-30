@@ -4,11 +4,16 @@ require_once('WaitlistEntry.php');
 // A collection of waitlistEntries. Handles reading and writing to files
 class Waitlist {
 	private $department;
+	private $section;
+	private $course;
 	private $entries;
+	private $header;
 	private $filePath;
 	
-	public function __construct($department) {
+	public function __construct($department, $section = "", $course) {
 		$this->department = $department;
+		$this->section = $section;
+		$this->course = $course;
 		$this->entries = array();
 		$this->filePath = "../storage/waitlists/". $department . ".csv";
 		$data = "";
@@ -64,17 +69,19 @@ class Waitlist {
 				</tr>
 			</thead>
 			<tbody>
-				<? for($i = 1; $i < count($entries); $i++) { ?>
-					<tr>
-						<td><?php echo $entries[$i]->getCourse();?></td>
-						<td><?php echo $entries[$i]->getSection();?></td>
-						<td><?php echo $entries[$i]->getFirstName();?></td>
-						<td><?php echo $entries[$i]->getLastName();?></td>
-						<td><?php echo $entries[$i]->getEmail();?></td>
-						<td><?php echo $entries[$i]->getStudentId();?></td>
-						<td><?php echo $entries[$i]->getReason();?></td>
-					</tr>
-				<? } ?>
+				<? for($i = 1; $i < count($entries); $i++) { 
+					if($entries[$i]->getCourse() == $this->course) { ?>
+						<tr>
+							<td><?php echo $entries[$i]->getCourse();?></td>
+							<td><?php echo $entries[$i]->getSection();?></td>
+							<td><?php echo $entries[$i]->getFirstName();?></td>
+							<td><?php echo $entries[$i]->getLastName();?></td>
+							<td><?php echo $entries[$i]->getEmail();?></td>
+							<td><?php echo $entries[$i]->getStudentId();?></td>
+							<td><?php echo $entries[$i]->getReason();?></td>
+						</tr>
+					<? }
+				} ?>
 			</tbody>
 		</table>
 		<?

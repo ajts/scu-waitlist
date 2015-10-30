@@ -12,7 +12,7 @@
                         <p>Please select department, course, and section to view a waitlist.</p>
                 </div>
                 <div class="container" id="container">
-                        <form method="post" action="core/scripts/submitRequest.php" class="container">
+                        <form class="container">
                                 <div class="left">
                                         <p class="leftItem"><label for="selectDept">Select Department:</label>
                                                 <select class="leftItem" id="dpmnt" name="dpmnt" required onchange="fillCourses(this, document.getElementById('course'))">
@@ -32,12 +32,12 @@
                                                         <option></option>
                                                 </select>
                                         </p>
+                                        <p class="leftItem">
+                                                <button class="submitbutton">Submit</button>
+                                        </p>
                                 </div>
                                 <div class="right">
-                                        <div class="info">
-                                        </div>
-                                        <div class="below">
-                                        </div>
+                                        <div class="waitlist"></div>
 
                                 </div>
                         </form>
@@ -96,6 +96,8 @@
                 var department = $('#dpmnt option:selected').text();
                 var course = $('#course option:selected').text();
                 var section = $('#section option:selected').text();
+                if(department == "" || course == "")
+                        return;
                 $.post('./core/scripts/getWaitlist.php', {department:department, course:course, section:section},
                         function(data) {
                                 $(".waitlist").html(data);
