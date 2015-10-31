@@ -67,7 +67,7 @@
 		dd.add(x);
 	}
 	function validateId(){
-		var idRegex = /00000\d\d\d\d\d$/;
+		var idRegex = /00000\d\d\d\d\d\d$/;
 		var id=document.getElementById("id").value;
 		if(!idRegex.test(id)){
 			document.getElementById("submit").disabled=true;

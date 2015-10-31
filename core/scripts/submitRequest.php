@@ -1,4 +1,16 @@
 <?php
+	// grab recaptcha library
+require_once "recaptchalib.php";
+$secret='6LcqABATAAAAABxfd3YDZWpcVlveBLMnNfl3nsA3';
+$response=null;
+$reCaptcha=new ReCaptcha($secret);
+if ($_POST["g-recaptcha-response"]) {
+    $response = $reCaptcha->verifyResponse(
+        $_SERVER["REMOTE_ADDR"],
+        $_POST["g-recaptcha-response"]
+    );
+}
+
 require_once(dirname(__FILE__).'/../classes/WaitlistEntry.php');
 
 $params = array();
@@ -11,11 +23,14 @@ $params['studentId'] = trim($_POST['id']);
 $params['email'] = trim($_POST['email']);
 $params['reason'] = trim($_POST['reason']);
 
-$request = new WaitlistEntry($params);
-try {
-	$request->save();
-	echo "success!";
-} catch(Exception $e) {
-	echo $e->getMessage();
+
+if($response!=null && $response->success){
+	$request = new WaitlistEntry($params);
+	try {
+		$request->save();
+		echo "success!";
+	} catch(Exception $e) {
+		echo $e->getMessage();
+	}
 }
 ?>

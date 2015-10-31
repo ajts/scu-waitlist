@@ -1,6 +1,8 @@
+
 <html>
 	<head>
 		<meta charset="utf-8">
+		<script src='https://www.google.com/recaptcha/api.js'></script>
 		<link rel="stylesheet" type="text/css" href="style.css">
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
@@ -12,7 +14,7 @@
 			<p>Please fill out the form below to submit a request to be added to the waitlist.</p>
 		</div>
 		<div class="container" id="container">
-			<form method="post" action="core/scripts/submitRequest.php" class="container">
+			<form method="post" action="core/scripts/submitRequest.php" method="post" class="container">
 				<div class="left">
 				<!--
 					<p class="leftItem"><label for="year">Select Year:</lable>
@@ -30,14 +32,14 @@
 					</p>
 				-->
 					<p class="leftItem"><label for="selectDept">Select Department:</label>
-						<select class="leftItem" id="dpmnt" name="dpmnt" required onclick="fillCourses(this, document.getElementById('course'))">
+						<select class="leftItem" id="dpmnt" name="dpmnt" required onchange="fillCourses(this, document.getElementById('course'))">
 							<option>Select Department</option>
 							<option>Computer Engineering</option>
 						</select>
 					</p>
 					<p class="leftItem">
 						<label for="selectCourse">Select Course:</label>
-						<select class="leftItem" id="course" name="course" required onclick="fillSection(this, document.getElementById('section'))">
+						<select class="leftItem" id="course" name="course" required onchange="fillSection(this, document.getElementById('section'))">
 							<option>Select Course</option>
 						</select>
 					</p>
@@ -72,10 +74,12 @@
 						<textarea rows="3" id="reason" name="reason" required></textarea>
 						<div class="text-center">
 							<button id="submit" class="btn btn-default" type="Submit">Submit</button>
+							<div class="g-recaptcha" data-sitekey="6LcqABATAAAAABikoeZYmOaiO7RvyG1nxT_HlVFA"></div>
 						</div>
 					</div>
 
 				</div>
+				
 			</form>
 		</div>
 	</body>
