@@ -11,7 +11,7 @@ class Waitlist {
 	private $sectionBucket;
 	private $filePath;
 	
-	public function __construct($department, $section = "", $course) {
+	public function __construct($department, $section = null, $course = null) {
 		$this->department = $department;
 		$this->section = $section;
 		$this->course = $course;
@@ -71,7 +71,8 @@ class Waitlist {
 			</thead>
 			<tbody>
 				<?php for($i = 1; $i < count($entries); $i++) { 
-					if($entries[$i]->getCourse() == $this->course) { ?>
+					if((isset($this->course) && $entries[$i]->getCourse() == $this->course)
+						&& (isset($this->section) && $entries[$i]->getSection() == $this->section)) { ?>
 						<tr>
 							<td><?php echo $entries[$i]->getCourse();?></td>
 							<td><?php echo $entries[$i]->getSection();?></td>
