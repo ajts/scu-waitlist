@@ -11,8 +11,7 @@ class WaitlistEntry {
 	private $reason;
 	private $department;
 	private $course;
-	private $section;
-	private $dataManager;
+	private $section;	
 	// constants that refer to the index of each field in a csv row
 	// for example, accessing the course field from row in a csv file can be done in the following way:
 	// explode("," $row)[COURSE];

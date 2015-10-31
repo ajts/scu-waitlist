@@ -12,7 +12,7 @@
 			var department = $('#dpmnt option:selected').text();
 			var course = $('#course option:selected').text();
 			var section = $('#section option:selected').text();
-			if(department == "" || course == "")
+			if(department == "Select Option" || course == "Select Option" || section == "Select Option")
 					return;
 			$.post('./core/scripts/getWaitlist.php', {department:department, course:course, section:section},
 					function(data) {
