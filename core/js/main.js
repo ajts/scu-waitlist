@@ -80,8 +80,9 @@
 		}
 	}
 	function validateName(){
-		var fname=$('#fname');
-		var lname=$('#lname');
+		var fname=$('#fname').val();
+		var lname=$('#lname').val();
+		console.log(fname);
 		if(fname!=null && lname!= null){
 			if(fname.length>25){
 				$("#fname").css('border-color', 'red');
