@@ -41,7 +41,7 @@
 
                                 </div>
                         </div>
-                        <a href="core/storage/waitlists/COEN.csv">Download waitlist for departmentt</a>
+                        <a href="core/storage/waitlists/COEN.csv">Download waitlist for department</a>
                 </div>
         </body>
 <html>

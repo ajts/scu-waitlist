@@ -1,6 +1,4 @@
 AuthUserFile /Applications/MAMP/htdocs/scu-waitlist/.htpasswd
  AuthName "Faculty Page"
  AuthType Basic
- <Files "facultypage.php">
-   require valid-user
- </Files>
+ require valid-user
