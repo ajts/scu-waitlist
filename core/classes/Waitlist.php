@@ -80,7 +80,7 @@ class Waitlist {
 							<td><?php echo $entries[$i]->getLastName();?></td>
 							<td><?php echo $entries[$i]->getEmail();?></td>
 							<td><?php echo $entries[$i]->getStudentId();?></td>
-							<td><?php echo preg_replace("/co\?;/", ",", $entries[$i]->getReason());?></td>
+							<td><?php echo preg_replace("/;/", ",", $entries[$i]->getReason());?></td>
 						</tr>
 					<?php }
 				} ?>

@@ -104,7 +104,7 @@ class WaitlistEntry {
 		// remove new line characters
 		$output = preg_replace("/\r\n/", " ", $input);
 		// replace commas with '\comma'
-		$output = preg_replace("/,/", '","', $output);
+		$output = preg_replace("/,/", ";", $output);
 		// remove any html tags
 		$output = preg_replace("/<[^>]*>/", "", $output);
 		return $output;
