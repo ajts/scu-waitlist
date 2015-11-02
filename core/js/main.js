@@ -1,7 +1,6 @@
 	var lines = [];	
 	var courses = [];
 	$(document).ready(function() {
-		// $("#submit").attr('disabled', 'disabled');
 	    $.ajax({
 	        type: "POST",
 	        url: "./core/storage/courses/coen.csv",
@@ -72,7 +71,6 @@
 		var id=document.getElementById("id").value;
 		if(!idRegex.test(id)){
 			$("#id").css('border-color', 'red');
-			$("#submit").attr('disabled', 'disabled');
 		}
 		else{
 			$("#id").removeAttr('style');
@@ -85,11 +83,9 @@
 		if(fname!=null && lname!= null){
 			if(fname.length>25){
 				$("#fname").css('border-color', 'red');
-				$("#submit").attr('disabled', 'disabled');
 			}
 			else if(lname.length>25){
 				$("#lname").css('border-color', 'red');
-				$("#submit").attr('disabled', 'disabled');
 			}
 			else return true;
 		}
@@ -106,21 +102,10 @@
 				return true;
 			}
 		}
-	}
-	
+	}	
 	function validateForm(){
-		if(!validateName() || !validateEmail() || !validateId()){
+		if(!validateName() || !validateEmail() || !validateId() || grecaptcha.getResponse()==""){
 			event.preventDefault();
 			return false;
 		}
-		// else return true;
-		// $("#form").validate();
-		// $("#form").on('submit', function(){
-		// 	var isValid=$("#form").valid();
-		// 	if(!isValid)
-		// 	{
-		// 		(":button").preventDefault();
-		// 		console.log("invalid");
-		// 	}
-		// });
 	}
