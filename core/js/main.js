@@ -1,14 +1,16 @@
 	var lines = [];	
 	var courses = [];
 	$(document).ready(function() {
-		$("#submit").attr('disabled', 'disabled');
+		// $("#submit").attr('disabled', 'disabled');
 	    $.ajax({
 	        type: "GET",
 	        url: "./core/storage/courses/coen.csv",
 	        dataType: "text",
 	        success: function(data) {processData(data);}
 	     });
-		 
+		 $.validator.addMethod("validateEmail", validateEmail());
+		 $.validator.addMethod("validateId", validateId());
+		 $.validator.addMethod("validateName", validateName());
 		$(".submitbutton").click(function(){
 			var department = $('#dpmnt option:selected').text();
 			var course = $('#course option:selected').text();
@@ -29,7 +31,6 @@
 	    }
 	}
 	function fillCourses(dept, coursesDd){
-		console.log("clicked");
 		switch(dept.value){
 			case 'Computer Engineering':
 			coursesDd.options.length = 1;
@@ -76,6 +77,25 @@
 		}
 		else{
 			$("#id").removeAttr('style');
+			return true;
+		}
+	}
+	function validateName(){
+		var fname=$('#fname');
+		var lname=$('#lname');
+		if(fname.length>25){
+			$("#fname").css('border-color', 'red');
+			$("#submit").attr('disabled', 'disabled');
+			return false;
+		}
+		else if(lname.length>25){
+			$("#lname").css('border-color', 'red');
+			$("#submit").attr('disabled', 'disabled');
+			return false;
+		}
+		else{
+			$('#submit').attr('disabled', false);
+			return true;
 		}
 	}
 	function validateEmail(){
@@ -84,11 +104,21 @@
 		if(!emailRegex.test(email)){
 			$("#email").css('border-color', 'red');
 			$("#submit").attr('disabled', 'disabled');
+			return false;
 		}
 		else{
-		$("#email").removeAttr('style');		
+			$("#email").removeAttr('style');
+			$('#submit').attr('disabled', false);
+			return true;		
 		}
 	}
-	function enableSubmit(){
-		$("#submit").removeAttr('disabled');
+	
+	function validate(){
+		$("#form").validate();
+		var vId=validateId();
+		var vEmail=validateEmail();
+		var vName=validateName();
+		if(vId == false || vEmail==false || vName==false){
+			$(":button").preventDefault();
+		}
 	}

@@ -7,6 +7,8 @@
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+		<script src="http://jqueryvalidation.org/files/dist/jquery.validate.min.js"></script>
+	<script src="http://jqueryvalidation.org/files/dist/additional-methods.min.js"></script>
 	</head>
 	<body>
 		<div class="header" id="header">
@@ -14,23 +16,8 @@
 			<p>Please fill out the form below to submit a request to be added to the waitlist.</p>
 		</div>
 		<div class="container" id="container">
-			<form method="post" action="core/scripts/submitRequest.php" method="post" class="container">
+			<form id="form" method="post" action="core/scripts/submitRequest.php" method="post" class="container">
 				<div class="left">
-				<!--
-					<p class="leftItem"><label for="year">Select Year:</lable>
-						<select class="leftItem" id="year" name="year">
-							<option></option>
-						</select>
-					</p>
-					<p class="leftItme"><label for="quarter">Select Quarter:</label>
-						<select class="leftItem" id="quarter" name="quarter">
-							<option>Fall</option>
-							<option>Winter</option>
-							<option>Spring</option>
-							<option>Summer</option>
-						</select>
-					</p>
-				-->
 					<p class="leftItem"><label for="selectDept">Select Department:</label>
 						<select class="leftItem" id="dpmnt" name="dpmnt" required onchange="fillCourses(this, document.getElementById('course'))">
 							<option>Select Department</option>
@@ -54,11 +41,11 @@
 					<div class="info">
 						<div>
 							<label for="fname">First Name:</label>
-							<input type="text" id="fname" name="fname" required>
+							<input type="text" id="fname" name="fname" onchange="validateName()" maxlength="25" required>
 						</div>
 						<div>
 							<label for="lname">Last Name:</label>
-							<input type="text" id="lname" name="lname" required>
+							<input type="text" id="lname" name="lname" maxlength="25" onchange="validateName()" required>
 						</div>
 						<div>
 							<label for="id">Student ID:</label>
@@ -66,14 +53,14 @@
 						</div>
 						<div>
 							<label for="email">SCU email:</label>
-							<input type="email" id="email" name="email" required onchange="validateEmail()">
+							<input type="email" id="email" name="email" onchange="validateEmail()" required>
 						</div>
 					</div>
 					<div class="below">
 						<label for="reason">Please explain why you need this class</label><br>
 						<textarea rows="3" id="reason" name="reason" required></textarea>
 						<div class="text-center">
-							<button id="submit" class="btn btn-default" type="Submit" disabled>Submit</button>
+							<button id="submit" class="btn btn-default" type="Submit" onclick='validate()'>Submit</button>
 							<div class="g-recaptcha" data-callback="enableSubmit" data-sitekey="6LcqABATAAAAABikoeZYmOaiO7RvyG1nxT_HlVFA"></div>
 						</div>
 					</div>
