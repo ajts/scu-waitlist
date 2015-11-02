@@ -41,8 +41,12 @@
 
                                 </div>
                         </div>
-                        <a href="core/storage/waitlists/COEN.csv">Download waitlist for department</a>
-                </div>
+                        <?php 
+                        if(file_exists("core/storage/waitlists/COEN.csv"))
+                                echo '<a href="core/storage/waitlists/COEN.csv">Download waitlist for department</a>';
+                        else 
+                                echo "No requests submitted yet";
+                        ?>
         </body>
 <html>
         
