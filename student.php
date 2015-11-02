@@ -33,7 +33,7 @@
 					<p class="leftItem">
 						<label for="sectionNumber">Section Number:</label>
 						<select class="leftItem" id="section" name="section" class="section" required>
-							<option>Selection Section</option>
+							<option>Select Section</option>
 						</select>
 					</p>
 				</div>

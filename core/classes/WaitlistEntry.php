@@ -38,9 +38,9 @@ class WaitlistEntry {
 		$this->studentId = $params['studentId'] == "" ? null : $params['studentId'];
 		$this->email = $params['email'] == "" ? null : $params['email'];
 		$this->reason = $this->sanitize($params['reason']) == "" ? null : $this->sanitize($params['reason']);
-		$this->course = $params['course'] == "" ? null : $params['course'];;
-		$this->department = explode(" ", $this->course)[0] == "" ? null : explode(" ", $this->course)[0];
-		$this->section = $params['section'] == "" ? null : $params['section'];
+		$this->course = $params['course'] == "Select Course" ? null : $params['course'];;
+		$this->department = explode(" ", $this->course)[0] == "Select" ? null : explode(" ", $this->course)[0];
+		$this->section = $params['section'] == "Select Section" ? null : $params['section'];
 	}
 	
 	// getters
