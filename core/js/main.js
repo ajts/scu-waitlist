@@ -82,7 +82,6 @@
 	function validateName(){
 		var fname=$('#fname').val();
 		var lname=$('#lname').val();
-		console.log(fname);
 		if(fname!=null && lname!= null){
 			if(fname.length>25){
 				$("#fname").css('border-color', 'red');
@@ -111,7 +110,6 @@
 	
 	function validateForm(){
 		if(!validateName() || !validateEmail() || !validateId()){
-			console.log("finvalid");
 			event.preventDefault();
 			return false;
 		}
