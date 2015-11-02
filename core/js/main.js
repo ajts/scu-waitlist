@@ -3,14 +3,11 @@
 	$(document).ready(function() {
 		// $("#submit").attr('disabled', 'disabled');
 	    $.ajax({
-	        type: "GET",
+	        type: "POST",
 	        url: "./core/storage/courses/coen.csv",
 	        dataType: "text",
 	        success: function(data) {processData(data);}
 	     });
-		 // $.validator.addMethod("validateEmail", validateEmail());
-		 // $.validator.addMethod("validateId", validateId());
-		 // $.validator.addMethod("validateName", validateName());
 		$(".submitbutton").click(function(){
 			var department = $('#dpmnt option:selected').text();
 			var course = $('#course option:selected').text();
@@ -79,6 +76,7 @@
 		}
 		else{
 			$("#id").removeAttr('style');
+			return true;
 		}
 	}
 	function validateName(){
@@ -93,7 +91,7 @@
 				$("#lname").css('border-color', 'red');
 				$("#submit").attr('disabled', 'disabled');
 			}
-			return true;
+			else return true;
 		}
 	}
 	function validateEmail(){
@@ -105,12 +103,14 @@
 			}
 			else{
 				$("#email").removeAttr('style');
+				return true;
 			}
 		}
 	}
 	
 	function validateForm(){
 		if(!validateName() || !validateEmail() || !validateId()){
+			console.log("finvalid");
 			event.preventDefault();
 			return false;
 		}

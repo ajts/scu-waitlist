@@ -41,7 +41,7 @@
 					<div class="info">
 						<div>
 							<label for="fname">First Name:</label>
-							<input type="text" id="fname" name="fname" onchange="validateName()"  required>
+							<input type="text" id="fname" name="fname" maxlength="25" onchange="validateName()"  required>
 						</div>
 						<div>
 							<label for="lname">Last Name:</label>
