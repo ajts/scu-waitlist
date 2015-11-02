@@ -8,9 +8,9 @@
 	        dataType: "text",
 	        success: function(data) {processData(data);}
 	     });
-		 $.validator.addMethod("validateEmail", validateEmail());
-		 $.validator.addMethod("validateId", validateId());
-		 $.validator.addMethod("validateName", validateName());
+		 // $.validator.addMethod("validateEmail", validateEmail());
+		 // $.validator.addMethod("validateId", validateId());
+		 // $.validator.addMethod("validateName", validateName());
 		$(".submitbutton").click(function(){
 			var department = $('#dpmnt option:selected').text();
 			var course = $('#course option:selected').text();
@@ -79,48 +79,49 @@
 		}
 		else{
 			$("#id").removeAttr('style');
-			return true;
 		}
 	}
 	function validateName(){
 		var fname=$('#fname');
 		var lname=$('#lname');
-		if(fname.length>25){
-			$("#fname").css('border-color', 'red');
-			$("#submit").attr('disabled', 'disabled');
-			return false;
-		}
-		else if(lname.length>25){
-			$("#lname").css('border-color', 'red');
-			$("#submit").attr('disabled', 'disabled');
-			return false;
-		}
-		else{
-			$('#submit').attr('disabled', false);
+		if(fname!=null && lname!= null){
+			if(fname.length>25){
+				$("#fname").css('border-color', 'red');
+				$("#submit").attr('disabled', 'disabled');
+			}
+			else if(lname.length>25){
+				$("#lname").css('border-color', 'red');
+				$("#submit").attr('disabled', 'disabled');
+			}
 			return true;
 		}
 	}
 	function validateEmail(){
 		var emailRegex = /.*@scu.edu/;
 		var email=document.getElementById("email").value;
-		if(!emailRegex.test(email)){
-			$("#email").css('border-color', 'red');
-			$("#submit").attr('disabled', 'disabled');
-			return false;
-		}
-		else{
-			$("#email").removeAttr('style');
-			$('#submit').attr('disabled', false);
-			return true;		
+		if(email!=null){
+			if(!emailRegex.test(email)){
+				$("#email").css('border-color', 'red');
+			}
+			else{
+				$("#email").removeAttr('style');
+			}
 		}
 	}
 	
-	function validate(){
-		$("#form").validate();
-		var vId=validateId();
-		var vEmail=validateEmail();
-		var vName=validateName();
-		if(vId == false || vEmail==false || vName==false){
-			$(":button").preventDefault();
+	function validateForm(){
+		if(!validateName() || !validateEmail() || !validateId()){
+			event.preventDefault();
+			return false;
 		}
+		// else return true;
+		// $("#form").validate();
+		// $("#form").on('submit', function(){
+		// 	var isValid=$("#form").valid();
+		// 	if(!isValid)
+		// 	{
+		// 		(":button").preventDefault();
+		// 		console.log("invalid");
+		// 	}
+		// });
 	}

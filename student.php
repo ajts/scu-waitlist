@@ -16,7 +16,7 @@
 			<p>Please fill out the form below to submit a request to be added to the waitlist.</p>
 		</div>
 		<div class="container" id="container">
-			<form id="form" method="post" action="core/scripts/submitRequest.php" method="post" class="container">
+			<form id="form" method="post" onSubmit="validateForm()" action="core/scripts/submitRequest.php" method="post" class="container">
 				<div class="left">
 					<p class="leftItem"><label for="selectDept">Select Department:</label>
 						<select class="leftItem" id="dpmnt" name="dpmnt" required onchange="fillCourses(this, document.getElementById('course'))">
@@ -41,7 +41,7 @@
 					<div class="info">
 						<div>
 							<label for="fname">First Name:</label>
-							<input type="text" id="fname" name="fname" onchange="validateName()" maxlength="25" required>
+							<input type="text" id="fname" name="fname" onchange="validateName()"  required>
 						</div>
 						<div>
 							<label for="lname">Last Name:</label>
@@ -60,8 +60,8 @@
 						<label for="reason">Please explain why you need this class</label><br>
 						<textarea rows="3" id="reason" name="reason" required></textarea>
 						<div class="text-center">
-							<button id="submit" class="btn btn-default" type="Submit" onclick='validate()'>Submit</button>
-							<div class="g-recaptcha" data-callback="enableSubmit" data-sitekey="6LcqABATAAAAABikoeZYmOaiO7RvyG1nxT_HlVFA"></div>
+							<button id="submit" class="btn btn-default" type="Submit">Submit</button>
+							<div class="g-recaptcha" data-sitekey="6LcqABATAAAAABikoeZYmOaiO7RvyG1nxT_HlVFA"></div>
 						</div>
 					</div>
 
