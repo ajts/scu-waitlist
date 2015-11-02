@@ -1,0 +1,6 @@
+AuthUserFile /.htpasswd
+ AuthName "Faculty Page"
+ AuthType Basic
+ <Files "facultypage.php">
+   require valid-user
+ </Files>

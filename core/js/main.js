@@ -1,6 +1,7 @@
 	var lines = [];	
 	var courses = [];
 	$(document).ready(function() {
+		$("#submit").attr('disabled', 'disabled');
 	    $.ajax({
 	        type: "GET",
 	        url: "./core/storage/courses/coen.csv",
@@ -72,21 +73,24 @@
 		var idRegex = /00000\d\d\d\d\d\d$/;
 		var id=document.getElementById("id").value;
 		if(!idRegex.test(id)){
-			document.getElementById("submit").disabled=true;
-			alert('Please enter your Student ID according to the format: 0000012345');
+			$("#id").css('border-color', 'red');
+			$("#submit").attr('disabled', 'disabled');
 		}
-		else if(idRegex.test(id)){
-			document.getElementById("submit").disabled=false;
+		else{
+			$("#id").removeAttr('style');
 		}
 	}
 	function validateEmail(){
 		var emailRegex = /.*@scu.edu/;
 		var email=document.getElementById("email").value;
 		if(!emailRegex.test(email)){
-			document.getElementById("submit").disabled=true;
-			alert('Please enter your Student email according to the format: aperson@scu.edu');
+			$("#email").css('border-color', 'red');
+			$("#submit").attr('disabled', 'disabled');
 		}
-		else if(emailRegex.test(email)){
-			document.getElementById("submit").disabled=false;
+		else{
+		$("#email").removeAttr('style');		
 		}
+	}
+	function enableSubmit(){
+		$("#submit").removeAttr('disabled');
 	}
