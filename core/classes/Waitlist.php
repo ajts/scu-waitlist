@@ -56,6 +56,10 @@ class Waitlist {
 	// displays waitlist as a HTML table
 	public function display() {
 		$entries = $this->entries;
+		if(empty($entries)) {
+			echo "No requests submitted yet";
+			return;
+		}
 		?>
 		<table>
 			<thead>
