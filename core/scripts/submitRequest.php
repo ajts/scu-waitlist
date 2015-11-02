@@ -23,7 +23,6 @@ $params['studentId'] = trim($_POST['id']);
 $params['email'] = trim($_POST['email']);
 $params['reason'] = trim($_POST['reason']);
 
-
 if($response!=null && $response->success){
 	$request = new WaitlistEntry($params);
 	try {
@@ -33,4 +32,8 @@ if($response!=null && $response->success){
 		echo $e->getMessage();
 	}
 }
+else {
+	echo "Captcha error. Please try again if you are a person. Stop if you are a bot.";
+}
+echo '<br/><a href="../../student.php">Submit another request</a>';
 ?>

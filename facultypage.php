@@ -15,14 +15,14 @@
                         <div class="form container">
                                 <div class="left">
                                         <p class="leftItem"><label for="selectDept">Select Department:</label>
-                                                <select class="leftItem" id="dpmnt" name="dpmnt" required onclick="fillCourses(this, document.getElementById('course'))">
+                                                <select class="leftItem" id="dpmnt" name="dpmnt" required onchange="fillCourses(this, document.getElementById('course'))">
                                                         <option>Select Option</option>
                                                         <option>Computer Engineering</option>
                                                 </select>
                                         </p>
                                         <p class="leftItem">
                                                 <label for="selectCourse">Select Course:</label>
-                                                <select class="leftItem" id="course" name="course" required onclick="fillSection(this, document.getElementById('section'))">
+                                                <select class="leftItem" id="course" name="course" required onchange="fillSection(this, document.getElementById('section'))">
                                                         <option>Select Option</option>
                                                 </select>
                                         </p>

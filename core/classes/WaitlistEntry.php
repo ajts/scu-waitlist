@@ -33,14 +33,14 @@ class WaitlistEntry {
 	// course: four letter abbreviation of department with two-three digit number for the course (COEN 12, COEN 20, COEN 174, etc.)
 	// section: five digit number designating a section number for a course
 	public function __construct($params) {
-		$this->firstName = $params['fName'];
-		$this->lastName = $params['lName'];
-		$this->studentId = $params['studentId'];
-		$this->email = $params['email'];
-		$this->reason = $params['reason'];
-		$this->course = $params['course'];
-		$this->department = explode(" ", $this->course)[0];
-		$this->section = $params['section'];
+		$this->firstName = $params['fName'] == "" ? null : $params['fName'];
+		$this->lastName = $params['lName'] == "" ? null : $params['lName'];
+		$this->studentId = $params['studentId'] == "" ? null : $params['studentId'];
+		$this->email = $params['email'] == "" ? null : $params['email'];
+		$this->reason = $this->sanitize($params['reason']) == "" ? null : $this->sanitize($params['reason']);
+		$this->course = $params['course'] == "" ? null : $params['course'];;
+		$this->department = explode(" ", $this->course)[0] == "" ? null : explode(" ", $this->course)[0];
+		$this->section = $params['section'] == "" ? null : $params['section'];
 	}
 	
 	// getters
@@ -79,6 +79,8 @@ class WaitlistEntry {
 	// Saves an entry to the appropiate file. Throws exception if student has already been added to waitlist
 	public function save() {
 		$waitlist = new Waitlist($this->department);
+		if(!$this->verifyValues())
+			throw new Exception("Error processing request. Please try again.");
 		if($waitlist->inList($this->studentId, $this->course, $this->section))
 			throw new Exception("Student already added to waitlist");
 		else 
@@ -96,6 +98,28 @@ class WaitlistEntry {
 			$this->email . "," .
 			$this->studentId . "," .
 			$this->reason;
+	}
+	
+	private function sanitize($input) {
+		// remove new line characters
+		$output = preg_replace("/\r\n/", " ", $input);
+		// replace commas with '\comma'
+		$output = preg_replace("/,/", '","', $output);
+		// remove any html tags
+		$output = preg_replace("/<[^>]*>/", "", $output);
+		return $output;
+	}
+	
+	private function verifyValues() {
+		$idPattern = "/00000\d\d\d\d\d\d$/";
+		$emailPattern = "/.*@scu.edu/";
+		if(!isset($this->course, $this->department, $this->section, $this->firstName, $this->lastName, $this->studentId, $this->email, $this->reason))
+			return false;
+		if(preg_match($idPattern, $this->studentId) == 0)
+			return false;
+		if(preg_match($emailPattern, $this->email) == 0)
+			return false;
+		return true;
 	}
 }
 ?>
