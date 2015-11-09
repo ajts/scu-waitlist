@@ -1,32 +1,28 @@
 <?php
-$school = "EGR";
-$subject = "CENG";
-$ch = curl_init("http://www.scu.edu/courseavail/search/index.cfm?fuseAction=search&StartRow=1&EndRow=1000&MaxRow=1000&term=3700&acad_career=ugrad&school=".$school."&subject=".$subject."&catalog_num=&instructor_name1=&days1=&start_time1=&start_time2=&header=no&footer=no");
-$file = fopen("../storage/courses/" . strtolower($subject) . ".csv", "w");
-	
-curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-curl_setopt($ch, CURLOPT_HEADER, 0);
+// Returns all courses for a given department in json format. 
+// Each name in the object is a course number for a department,
+// while values are arrays that contain the section number for
+// that course. For example: 
+// Department = COEN
+// 		{ 
+// 			"12" : [00001, 00002],
+// 			"19" : [90231, 21341, 41231]
+// 		}
+// COEN 12 has sections 00001 and 00002 offered.
+// COEN 19 has sections 90231, 21341, and 41231 offered.
 
-$results = curl_exec($ch);
-$dom = new DOMDocument();
-$dom->loadHTML($results);
+$department = $_POST['dpmnt'];
 
-$csvLine = "";
-$courses = array();
-$stuff = $dom->getElementsByTagName('tr');
-foreach($stuff as $row) {
-	for($i = 0; $i < 4; $i++) {
-		// need this check, returns empty text nodes if left out
-		if($row->childNodes->item($i)->hasChildNodes() && trim($row->childNodes->item($i)->nodeValue) != "") {
-			$csvLine .= trim(str_replace(",", ".", $row->childNodes->item($i)->nodeValue));
-			if($i < 2)
-				$csvLine .= ",";
-		}
-	}
-	// create course object, serialize
-	echo fwrite($file, $csvLine."\n");
-	$csvLine = "";
+$file_path = "../storage/courses/engr.ser";
+$fp = fopen($file_path, "r");
+if(flock($fp, LOCK_SH)) {
+	set_file_buffer($fp, 0);
+	$course_list = unserialize(fread($fp, filesize($file_path)));
+	flock($fp, LOCK_UN);
 }
-curl_close($ch);
-fclose($file);
+else
+	error_log("unable to aquire read lock for courses");
+
+//echo '<script>console.log('.json_encode($course_list[$department]).')</script>';
+die(json_encode($course_list[$department]));
 ?>
