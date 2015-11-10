@@ -1,12 +1,7 @@
-	var lines = [];	
-	var courses = [];
+	$response="";
 	$(document).ready(function() {
-	    $.ajax({
-	        type: "POST",
-	        url: "./core/storage/courses/coen.csv",
-	        dataType: "text",
-	        success: function(data) {processData(data);}
-	     });
+		document.getElementById('form').reset();
+		fillDepartments();
 		$(".submitbutton").click(function(){
 			var department = $('#dpmnt option:selected').text();
 			var course = $('#course option:selected').text();
@@ -21,53 +16,38 @@
 					}, 'html');
         });
 	});
-	function processData(allText) {
-	    var allTextLines = allText.split(/\r\n|\n/);
-	    for (var i=0; i<allTextLines.length; i++) {
-	        var data = allTextLines[i].split(',');
-	        lines.push(data);
-	    }
+
+	function fillDepartments(){
+		$html='<option value="">Select Department</option>'+
+		'<option value="AMTH">Applied Mathematics</option>'+
+		'<option value="BIOE">Bioengineering</option>'+
+		'<option value="CENG">Civil Engineering</option>'+
+		'<option value="COEN">Computer Engineering</option>'+
+		'<option value="ELEN">Electrical Engineering</option>'+
+		'<option value="ENGR">Engineering</option>'+
+		'<option value="EMGT">Engineering Management</option>'+
+		'<option value="MECH">Mechanical Engineering</option>';
+		$('#dpmnt').html($html);
 	}
-	function fillCourses(dept, coursesDd){
-		switch(dept.value){
-			case 'Computer Engineering':
-			coursesDd.options.length = 1;
-			for(i = 1; i < lines.length; i ++)
-			{
-				add = true;
-				var j = 0;
-				while(j < i && add==true){
-					if(lines[j][0]==lines[i][0]){
-						add=false;
-					}
-					j++;
-				}
-				if(add == true){
-					addOption(coursesDd, lines[i][0], lines[i][0]);
-				}
-				
-			}
-			break;
+	function fillCourses(){
+		var dpmnt = $('#dpmnt').val();
+		$.post('./core/scripts/getCourses.php', {dpmnt: dpmnt},function(response){
+			$response = JSON.parse(response);
+			$.each($response, function (key, value){
+				$html='<option value='+key+'>'+dpmnt + " " +key+'</option>'
+				$('#course').append($html);
+			});
+		});
+	}
+	function fillSection(){
+		$course=$('#course').val();
+		for($i = 0; $i < $response[$course].length; $i++){
+			$html='<option value="'+$response[$course][$i]+'">'+$response[$course][$i]+'</option>';
+			$('#section').append($html);
 		}
-	}
-	function fillSection(coursesDd, sectionDd){
-		var course = document.getElementById("course").value;
-		sectionDd.options.length=1;
-		for(var i = 0; i < lines.length; i++)
-		{
-			if(lines[i][0]==course){
-				addOption(sectionDd, lines[i][1], lines[i][1]);
-			}
-		}
-	}
-	function addOption(dd, text, value){
-		var x = document.createElement("option");
-		x.value = value;
-		x.text = text;
-		dd.add(x);
 	}
 	function validateId(){
-		var idRegex = /00000\d\d\d\d\d\d$/;
+		var idRegex = /\d\d\d\d\d\d\d\d\d\d\d$/;
 		var id=document.getElementById("id").value;
 		if(!idRegex.test(id)){
 			$("#id").css('border-color', 'red');

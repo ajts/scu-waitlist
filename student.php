@@ -19,9 +19,8 @@
 			<form id="form" method="post" onSubmit="validateForm()" action="core/scripts/submitRequest.php" method="post" class="container">
 				<div class="left">
 					<p class="leftItem"><label for="selectDept">Select Department:</label>
-						<select class="leftItem" id="dpmnt" name="dpmnt" required onchange="fillCourses(this, document.getElementById('course'))">
-							<option>Select Department</option>
-							<option>Computer Engineering</option>
+						<select class="leftItem" id="dpmnt" name="dpmnt" required onchange="fillCourses()">
+							<option>Select Department</option>	
 						</select>
 					</p>
 					<p class="leftItem">
