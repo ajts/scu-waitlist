@@ -20,7 +20,6 @@
 				<div class="left">
 					<p class="leftItem"><label for="selectDept">Select Department:</label>
 						<select class="leftItem" id="dpmnt" name="dpmnt" required onchange="fillCourses()">
-							<option>Select Department</option>	
 						</select>
 					</p>
 					<p class="leftItem">
@@ -71,4 +70,5 @@
 	</body>
 <html>
 <script src="core/js/main.js">
+		document.onload(document.getElementById('form').reset();
 </script>

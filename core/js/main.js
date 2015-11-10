@@ -1,6 +1,6 @@
-	$response="";
+	// $response="";
+	var response = [];
 	$(document).ready(function() {
-		document.getElementById('form').reset();
 		fillDepartments();
 		$(".submitbutton").click(function(){
 			var department = $('#dpmnt option:selected').text();
@@ -18,7 +18,7 @@
 	});
 
 	function fillDepartments(){
-		$html='<option value="">Select Department</option>'+
+		$html='<option>Select Department</option>'+
 		'<option value="AMTH">Applied Mathematics</option>'+
 		'<option value="BIOE">Bioengineering</option>'+
 		'<option value="CENG">Civil Engineering</option>'+
@@ -32,19 +32,20 @@
 	function fillCourses(){
 		$('#course').html('<option>Select Course</option>');
 		var dpmnt = $('#dpmnt').val();
-		$.post('./core/scripts/getCourses.php', {dpmnt: dpmnt},function(response){
-			$response = JSON.parse(response);
-			$.each($response, function (key, value){
+		$.post('./core/scripts/getCourses.php', {dpmnt: dpmnt},function(r){
+			response = JSON.parse(r);
+			$.each(response, function (key, value){
 				$html='<option value='+key+'>'+dpmnt + " " +key+'</option>'
 				$('#course').append($html);
 			});
 		});
 	}
 	function fillSection(){
-		$('#course').html('<option>Select Section</option>');
+		$('#section').html('<option>Select Section</option>');
 		$course=$('#course').val();
-		for($i = 0; $i < $response[$course].length; $i++){
-			$html='<option value="'+$response[$course][$i]+'">'+$response[$course][$i]+'</option>';
+		console.log(response);
+		for($i = 0; $i < response[$course].length; $i++){
+			$html='<option value="'+response[$course][$i]+'">'+response[$course][$i]+'</option>';
 			$('#section').append($html);
 		}
 	}

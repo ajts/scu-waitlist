@@ -58,6 +58,7 @@ table {
 }
 .header p{
 	font-size: 15pt;
+	margin-bottom: 15px;
 }
 .container{
 	width: 90% !important;
