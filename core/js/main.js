@@ -25,7 +25,6 @@
 		'<option value="COEN">Computer Engineering</option>'+
 		'<option value="ELEN">Electrical Engineering</option>'+
 		'<option value="ENGR">Engineering</option>'+
-		'<option value="EMGT">Engineering Management</option>'+
 		'<option value="MECH">Mechanical Engineering</option>';
 		$('#dpmnt').html($html);
 	}
