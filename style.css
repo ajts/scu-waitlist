@@ -25,6 +25,7 @@ footer, header, hgroup, menu, nav, section {
 }
 body {
 	line-height: 1;
+	background-color: #eee !important;
 }
 ol, ul {
 	list-style: none;
@@ -42,14 +43,15 @@ table {
 	border-spacing: 0;
 }
 .header{
-	width: 85%;
+	width: 100%;
 	height: 100px;
 	margin-right: auto;
 	margin-left: auto;
 	margin-top: 20px;
 	padding-top: 10px;
 	padding-left: 5px;
-	margin-bottom: 10px;
+	margin-bottom: 45px;
+	background-color: #f15050;
 }
 .header h1{
 	font-size: 25pt;
@@ -59,15 +61,17 @@ table {
 }
 .container{
 	width: 90% !important;
+	max-width: 1200px;
 }
 .container .form, .container form{
-	border: 1px solid black;
+	border: .5px solid black;
 	margin-right: auto;
 	margin-left: auto;
 	width: 90%;
 	padding: 0;
 	display: flex;
 	font-size: 12pt;
+	background-color: white;
 }
 .left{
 	width: 200px;

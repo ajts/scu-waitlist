@@ -30,6 +30,7 @@
 		$('#dpmnt').html($html);
 	}
 	function fillCourses(){
+		$('#course').html('<option>Select Course</option>');
 		var dpmnt = $('#dpmnt').val();
 		$.post('./core/scripts/getCourses.php', {dpmnt: dpmnt},function(response){
 			$response = JSON.parse(response);
@@ -40,6 +41,7 @@
 		});
 	}
 	function fillSection(){
+		$('#course').html('<option>Select Section</option>');
 		$course=$('#course').val();
 		for($i = 0; $i < $response[$course].length; $i++){
 			$html='<option value="'+$response[$course][$i]+'">'+$response[$course][$i]+'</option>';

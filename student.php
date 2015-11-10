@@ -25,7 +25,7 @@
 					</p>
 					<p class="leftItem">
 						<label for="selectCourse">Select Course:</label>
-						<select class="leftItem" id="course" name="course" required onchange="fillSection(this, document.getElementById('section'))">
+						<select class="leftItem" id="course" name="course" required onchange="fillSection()">
 							<option>Select Course</option>
 						</select>
 					</p>
