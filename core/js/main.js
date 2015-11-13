@@ -6,7 +6,7 @@
 			var department = $('#dpmnt option:selected').text();
 			var course = $('#course option:selected').text();
 			var section = $('#section option:selected').text();
-			if(department == "Select Option" || course == "Select Option" || section == "Select Option") {
+			if(department == "Select Department" || course == "Select Course" || section == "Select Section") {
 					alert("Please select all options from dropdown lists");
 					return;
 			}

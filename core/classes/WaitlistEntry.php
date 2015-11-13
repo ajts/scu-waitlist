@@ -33,13 +33,13 @@ class WaitlistEntry {
 	// course: four letter abbreviation of department with two-three digit number for the course (COEN 12, COEN 20, COEN 174, etc.)
 	// section: five digit number designating a section number for a course
 	public function __construct($params) {
-		$this->firstName = $params['fName'] == "" ? null : $params['fName'];
-		$this->lastName = $params['lName'] == "" ? null : $params['lName'];
+		$this->firstName = $params['fName'] == "" ? null : $this->sanitize($params['fName']);
+		$this->lastName = $params['lName'] == "" ? null : $this->sanitize($params['lName']);
 		$this->studentId = $params['studentId'] == "" ? null : $params['studentId'];
 		$this->email = $params['email'] == "" ? null : $params['email'];
 		$this->reason = $this->sanitize($params['reason']) == "" ? null : $this->sanitize($params['reason']);
 		$this->course = $params['course'] == "Select Course" ? null : $params['course'];;
-		$this->department = explode(" ", $this->course)[0] == "Select" ? null : explode(" ", $this->course)[0];
+		$this->department = $params['department'] == "Select Department " ? null : $params['department'];
 		$this->section = $params['section'] == "Select Section" ? null : $params['section'];
 	}
 	
@@ -91,7 +91,7 @@ class WaitlistEntry {
 	// department course, section, firstName lastName, email, reason
 	// ex: COEN 174, 12345, John, Doe, john@scu.edu, need for graduation
 	public function toCsv() {
-		return "\n" . $this->course . "," . 
+		return "\n" . $this->department . " " . $this->course . "," . 
 			$this->section . "," . 
 			$this->firstName . ",". 
 			$this->lastName . "," .
@@ -111,7 +111,7 @@ class WaitlistEntry {
 	}
 	
 	private function verifyValues() {
-		$idPattern = "/00000\d\d\d\d\d\d$/";
+		$idPattern = "/\d{11}/";
 		$emailPattern = "/.*@scu.edu/";
 		if(!isset($this->course, $this->department, $this->section, $this->firstName, $this->lastName, $this->studentId, $this->email, $this->reason))
 			return false;
