@@ -35,18 +35,15 @@
                                         <p class="leftItem">
                                                 <button class="submitbutton">Enter</button>
                                         </p>
+                                        <p class="leftItem">
+                                                <button class="downloadWaitlist">Download Waitlist</button>
+                                        </p>
                                 </div>
                                 <div class="right">
                                         <div class="waitlist"></div>
 
                                 </div>
                         </div>
-                        <?php 
-                        if(file_exists("core/storage/waitlists/COEN.csv"))
-                                echo '<a href="core/storage/waitlists/COEN.csv">Download waitlist for department</a>';
-                        else 
-                                echo "No requests submitted yet";
-                        ?>
         </body>
 <html>
         

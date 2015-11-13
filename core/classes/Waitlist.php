@@ -114,6 +114,7 @@ class Waitlist {
 			$params['course'] = $fields[WaitlistEntry::COURSE];
 			$params['section'] = $fields[WaitlistEntry::SECTION];
 			$params['reason'] = $fields[WaitlistEntry::REASON];
+			$params['department'] = $this->department;
 			$this->entries[] = new WaitlistEntry($params);
 		}
 	}

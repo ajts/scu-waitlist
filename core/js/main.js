@@ -15,6 +15,24 @@
 							$(".waitlist").html(data);
 					}, 'html');
         });
+		
+		$('.downloadWaitlist').click(function() {
+			var department = $("#dpmnt option:selected").val();
+			if(department == "Select Department") {
+				alert("Select a department");
+				return;
+			}
+			console.log(department);
+			$.post("core/scripts/checkWaitlist.php", {department:department}, 
+				function(data) {
+					console.log(data);
+					if(data == "true")
+						window.location.href = "core/scripts/downloadWaitlist.php?department="+department;
+					else
+						alert("No waitlist for that department");
+				}
+			);
+		});
 	});
 
 	function fillDepartments(){
