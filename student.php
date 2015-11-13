@@ -56,7 +56,7 @@
 					</div>
 					<div class="below">
 						<label for="reason">Please explain why you need this class</label><br>
-						<textarea rows="3" id="reason" name="reason" required></textarea>
+						<textarea rows="3" id="reason" name="reason" required maxlength="250"></textarea>
 						<div class="text-center">
 							<button id="submit" class="btn btn-default" type="Submit">Submit</button>
 							<div class="g-recaptcha" data-callback="enableBtn" data-sitekey="6LcqABATAAAAABikoeZYmOaiO7RvyG1nxT_HlVFA"></div>
