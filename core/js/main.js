@@ -60,7 +60,6 @@
 	function fillSection(){
 		$('#section').html('<option>Select Section</option>');
 		$course=$('#course').val();
-		console.log(response);
 		for($i = 0; $i < response[$course].length; $i++){
 			$html='<option value="'+response[$course][$i]+'">'+response[$course][$i]+'</option>';
 			$('#section').append($html);
