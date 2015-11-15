@@ -62,8 +62,17 @@ class Waitlist {
 	
 	// displays waitlist as a HTML table
 	public function display() {
+		$count = 0;
 		$entries = $this->entries;
-		if(empty($entries)) {
+		$display = array();
+		for($i = 1; $i < count($entries); $i++) {
+			if((isset($this->course) && $entries[$i]->getCourse() == $this->course) 
+				&& (isset($this->section) && $entries[$i]->getSection() == $this->section)) {
+					$display[] = $entries[$i];
+				}
+				
+		}
+		if(empty($entries) || empty($display)) {
 			echo "No requests submitted yet";
 			return;
 		}
@@ -81,20 +90,17 @@ class Waitlist {
 				</tr>
 			</thead>
 			<tbody>
-				<?php for($i = 1; $i < count($entries); $i++) { 
-					if((isset($this->course) && $entries[$i]->getCourse() == $this->course)
-						&& (isset($this->section) && $entries[$i]->getSection() == $this->section)) { ?>
+				<?php foreach($display as $d) {  ?>
 						<tr>
-							<td><?php echo $entries[$i]->getCourse();?></td>
-							<td><?php echo $entries[$i]->getSection();?></td>
-							<td><?php echo $entries[$i]->getFirstName();?></td>
-							<td><?php echo $entries[$i]->getLastName();?></td>
-							<td><?php echo $entries[$i]->getEmail();?></td>
-							<td><?php echo $entries[$i]->getStudentId();?></td>
-							<td><?php echo preg_replace("/;/", ",", $entries[$i]->getReason());?></td>
+							<td><?php echo $d->getCourse();?></td>
+							<td><?php echo $d->getSection();?></td>
+							<td><?php echo $d->getFirstName();?></td>
+							<td><?php echo $d->getLastName();?></td>
+							<td><?php echo $d->getEmail();?></td>
+							<td><?php echo $d->getStudentId();?></td>
+							<td><?php echo preg_replace("/;/", ",", $d->getReason());?></td>
 						</tr>
-					<?php }
-				} ?>
+					<?php } ?>
 			</tbody>
 		</table>
 		<?php
