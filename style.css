@@ -134,3 +134,8 @@ select{
 	width: 305px;
 	margin-top: 25px;
 }
+.loading-message {
+	text-align: center;
+	margin-top: 3em;
+	
+}

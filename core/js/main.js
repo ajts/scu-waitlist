@@ -1,6 +1,8 @@
 	// $response="";
 	var response = [];
 	$(document).ready(function() {
+		// update courses on load, display loading message while loading
+		updateCourses();
 		fillDepartments();
 		$(".submitbutton").click(function(){
 			var department = $('#dpmnt option:selected').text();
@@ -33,7 +35,20 @@
 				}
 			);
 		});
+		
 	});
+	
+	function updateCourses() {
+		$("body").prepend('<div class="loading-message"></div>');
+		$(".loading-message").append('<h1>Loading page. Please wait!</h1>');
+		$(".loading-message").append('<img src="core/storage/loading.gif">');
+		$.post("core/scripts/updateCourses.php", 
+			function() {
+				$('.loading-message').remove();
+				$(".content").toggleClass("hidden");
+			}
+		);
+	}
 
 	function fillDepartments(){
 		$html='<option>Select Department</option>'+

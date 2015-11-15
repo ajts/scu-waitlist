@@ -36,21 +36,28 @@ class Waitlist {
 	
 	// adds waitlist entry to file
 	public function add($csvRow) {
-		if(!file_exists($this->filePath))
-			$entry = "Course,Section,First Name,Last Name,Email,Student ID,Reason" . $csvRow;
-		else 
-			$entry = $csvRow;
-		$fp = fopen($this->filePath, 'a');
-		// lock file for write
-		if(flock($fp, LOCK_EX)) {
-			// write entire line before releasing lock
-			set_file_buffer($fp, 0);
-			fwrite($fp, $entry);
-			flock($fp, LOCK_UN);
+		$lock = fopen("../storage/waitlists/update.lock", "r");
+		if(flock($lock, LOCK_SH)) {
+			if(!file_exists($this->filePath))
+				$entry = "Course,Section,First Name,Last Name,Email,Student ID,Reason" . $csvRow;
+			else 
+				$entry = $csvRow;
+			$fp = fopen($this->filePath, 'a');
+			// lock file for write
+			if(flock($fp, LOCK_EX)) {
+				// write entire line before releasing lock
+				set_file_buffer($fp, 0);
+				fwrite($fp, $entry);
+				flock($fp, LOCK_UN);
+			}
+			else
+				error_log("could not obtain lock for " . $this->department . " file.");
+			fclose($fp);
 		}
 		else
-			error_log("could not obtain lock for " . $this->department . " file.");
-		fclose($fp);
+			error_log("Could not add to waitlists");
+		flock($lock, LOCK_UN);
+		fclose($lock);
 	}
 	
 	// displays waitlist as a HTML table
