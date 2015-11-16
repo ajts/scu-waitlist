@@ -15,6 +15,8 @@
                         <div class="container" id="container">
                                 <div class="form container">
                                         <div class="left">
+                                                <div id="quarter">
+                                                </div>
                                                 <p class="leftItem"><label for="selectDept">Select Department:</label>
                                                         <select class="leftItem" id="dpmnt" name="dpmnt" required onchange="fillCourses()">
                                                                 <option>Select Option</option>

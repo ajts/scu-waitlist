@@ -68,7 +68,7 @@ table {
 	background-color: white;
 }
 .left{
-	padding-top: 25px;
+	padding-top: 15px;
 	padding-left: 15px;
 	padding-right: 10px;
 	padding-bottom: 10px;
@@ -90,6 +90,7 @@ select{
 	padding-bottom: 10px;
 	margin-right: auto;
 	margin-left: auto;
+	width: 90%;
 }
 .info{
 	margin-left: auto;
@@ -127,6 +128,25 @@ select{
 .waitlist table{
 	margin: 10px;
 	border: solid 1pt black;
+	width: 85%;
+	margin-right: auto;
+	margin-left: auto;
+}
+.waitlist td{
+	border: black 1px solid;
+	padding-left: 2px;
+	padding-right: 2px;
+	border-collapse: collapse;
+}
+.waitlist th{
+	border: black 1px solid;
+	text-align: center;
+	border-collapse: collapse;
+	font-weight: bold;
+}
+.waitlist{
+	margin-left: auto;
+	margin-right: auto;
 }
 .g-recaptcha{
 	margin-right: auto;
@@ -137,5 +157,10 @@ select{
 .loading-message {
 	text-align: center;
 	margin-top: 3em;
-	
+}
+#quarter{
+	margin-left: auto;
+	margin-right: auto;
+	margin-bottom: 5px;
+	text-align: center;
 }
