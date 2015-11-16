@@ -81,7 +81,7 @@ class WaitlistEntry {
 		$waitlist = new Waitlist($this->department);
 		if(!$this->verifyValues())
 			throw new Exception("Error processing request. Please try again.");
-		if($waitlist->inList($this->studentId, $this->course, $this->section))
+		if($waitlist->inList($this->studentId, $this->department, $this->course, $this->section))
 			throw new Exception("Student already added to waitlist");
 		else 
 			$waitlist->add($this->toCsv());

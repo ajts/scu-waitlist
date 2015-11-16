@@ -107,9 +107,9 @@ class Waitlist {
 	}
 	
 	// returns true if student id is aleady in the waitlist for a course and section, false otherwise
-	public function inList($studentId, $course, $section) {
+	public function inList($studentId, $department, $course, $section) {
 		foreach($this->entries as $entry) {
-			if($entry->getStudentId() == $studentId && $entry->getCourse() == $course && $entry->getSection() == $section)
+			if($entry->getStudentId() == $studentId && $entry->getCourse() == $department . " " . $course && $entry->getSection() == $section)
 				return true;
 		}
 		return false;
