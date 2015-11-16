@@ -43,6 +43,7 @@ class Waitlist {
 			else 
 				$entry = $csvRow;
 			$fp = fopen($this->filePath, 'a');
+			chmod($this->filePath, 0600);
 			// lock file for write
 			if(flock($fp, LOCK_EX)) {
 				// write entire line before releasing lock
