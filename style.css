@@ -147,6 +147,7 @@ select{
 .waitlist{
 	margin-left: auto;
 	margin-right: auto;
+	text-align: center;
 }
 .g-recaptcha{
 	margin-right: auto;
