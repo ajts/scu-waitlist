@@ -111,7 +111,7 @@ class WaitlistEntry {
 	}
 	
 	private function verifyValues() {
-		$idPattern = "/\d{11}/";
+		$idPattern = "/\b\d{11}\b/";
 		$emailPattern = "/.*@scu.edu/";
 		if(!isset($this->course, $this->department, $this->section, $this->firstName, $this->lastName, $this->studentId, $this->email, $this->reason))
 			return false;

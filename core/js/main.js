@@ -81,9 +81,9 @@
 		}
 	}
 	function validateId(){
-		var idRegex = /\d\d\d\d\d\d\d\d\d\d\d$/;
+		var idRegex = /\b\d{11}\b/;
 		var id=document.getElementById("id").value;
-		if(!idRegex.test(id)){
+		if(id.match(idRegex) == null){
 			$("#id").css('border-color', 'red');
 		}
 		else{
